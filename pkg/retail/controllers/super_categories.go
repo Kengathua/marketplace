@@ -49,8 +49,8 @@ func (h Handler) AddSuperCategory(c *fiber.Ctx) error {
 	superCategory.SuperCategoryName = body.SuperCategoryName
 	superCategory.SuperCategoryCode = body.SuperCategoryCode
 	superCategory.Description = body.Description
-	// division.CreatedBy = user.ID
-	// division.UpdatedBy = user.ID
+	// superCategory.CreatedBy = user.ID
+	// superCategory.UpdatedBy = user.ID
 
 	// insert new db entry
 	if result := h.DB.Create(&superCategory); result.Error != nil {

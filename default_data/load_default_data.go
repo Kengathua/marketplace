@@ -141,8 +141,17 @@ func main() {
 		fmt.Printf("Brand %s already exists\n", brand.BrandName)
 	}
 
+	brandItemType := models.BrandItemType{
+		BrandID: brand.ID, ItemTypeID: itemType.ID, BaseModel: baseModel}
+	config.DB.Find(&brandItemType, "brand_id = ? AND item_type_id = ?", brand.ID, itemType.ID)
+	if brandItemType.ID == uuid.Nil {
+		config.DB.Create(&brandItemType)
+	} else {
+		fmt.Printf("Brand Item type for %s brand and %s type already exists\n", brandItemType.Brand.BrandName, brandItemType.ItemType.TypeName)
+	}
+
 	model := models.Model{
-		BrandID: brand.ID, ModelNumber: "S-001", ModelCode: "M-001", BaseModel: baseModel}
+		ItemTypeID: itemType.ID, BrandID: brand.ID, ModelNumber: "S-001", ModelCode: "M-001", BaseModel: baseModel}
 	config.DB.Find(&model, "model_number = ?", model.ModelNumber)
 	if model.ID == uuid.Nil {
 		config.DB.Create(&model)
@@ -151,7 +160,8 @@ func main() {
 	}
 
 	item := models.Item{
-		ModelID: model.ID, ItemName: "Samsung S-001 Fridge", ItemCode: "I-001", BaseModel: baseModel}
+		BrandID: brand.ID, ModelID: model.ID, ItemTypeID: itemType.ID,
+		ItemName: "Samsung S-001 Fridge", ItemCode: "I-001", BaseModel: baseModel}
 	config.DB.Find(&item, "item_name = ?", item.ItemName)
 	if item.ID == uuid.Nil {
 		config.DB.Create(&item)

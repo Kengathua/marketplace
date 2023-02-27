@@ -71,13 +71,13 @@ CREATE TABLE IF NOT EXISTS item_types(
     created_by uuid,
     updated_by uuid,
     is_active boolean,
-    business_partner varchar(300) NOT NULL UNIQUE,
+    business_partner varchar(300) NOT NULL,
     category_id uuid NOT NULL CONSTRAINT fk_item_types_category
         REFERENCES categories (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    type_name varchar(300) NOT NULL UNIQUE,
-    type_code varchar(300) NOT NULL UNIQUE
+    type_name varchar(300) NOT NULL,
+    type_code varchar(300) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS brands(
@@ -88,9 +88,9 @@ CREATE TABLE IF NOT EXISTS brands(
     created_by uuid,
     updated_by uuid,
     is_active boolean,
-    business_partner varchar(300) NOT NULL UNIQUE,
-    brand_name varchar(300) NOT NULL UNIQUE,
-    brand_code varchar(300) NOT NULL UNIQUE
+    business_partner varchar(300) NOT NULL,
+    brand_name varchar(300) NOT NULL,
+    brand_code varchar(300) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS brand_item_types(
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS brand_item_types(
     created_by uuid,
     updated_by uuid,
     is_active boolean,
-    business_partner varchar(300) NOT NULL UNIQUE,
+    business_partner varchar(300) NOT NULL,
     brand_id uuid NOT NULL CONSTRAINT fk_brand_item_types_brand
         REFERENCES brands (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -120,13 +120,17 @@ CREATE TABLE IF NOT EXISTS models(
     created_by uuid,
     updated_by uuid,
     is_active boolean,
-    business_partner varchar(300) NOT NULL UNIQUE,
+    business_partner varchar(300) NOT NULL,
     brand_id uuid NOT NULL CONSTRAINT fk_models_brand
         REFERENCES brands (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    model_number varchar(300) NOT NULL UNIQUE,
-    model_code varchar(300) NOT NULL UNIQUE
+    item_type_id uuid NOT NULL CONSTRAINT fk_brand_item_types_item_type
+        REFERENCES item_types (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    model_number varchar(300) NOT NULL,
+    model_code varchar(300) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS items(
@@ -137,14 +141,23 @@ CREATE TABLE IF NOT EXISTS items(
     created_by uuid,
     updated_by uuid,
     is_active boolean,
-    business_partner varchar(300) NOT NULL UNIQUE,
-    model_id uuid NOT NULL CONSTRAINT fk_items_model
+    business_partner varchar(300) NOT NULL,
+    item_type_id uuid NULL CONSTRAINT fk_brand_item_types_item_type
+        REFERENCES item_types (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    brand_id uuid NULL CONSTRAINT fk_items_brand
+        REFERENCES brands (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    model_id uuid NULL CONSTRAINT fk_items_model
         REFERENCES models (id) MATCH SIMPLE
         ON UPDATE NO ACTION
         ON DELETE NO ACTION,
-    item_name varchar(300) NOT NULL UNIQUE,
-    barcode varchar(300) NOT NULL UNIQUE,
-    item_code varchar(300) NOT NULL UNIQUE,
+    item_name varchar(300) NOT NULL,
+    item_size varchar(300),
+    barcode varchar(300) NOT NULL,
+    item_code varchar(300) NOT NULL,
     make_year varchar(300)
 );
 

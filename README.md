@@ -27,3 +27,19 @@ Clone the repository and if you have go set up on your machine run
         go mod download
 
         go mod tidy
+
+## Migrate down
+
+    migrate -database ${POSTGRESQL_URL} -path ./db/migrations down
+
+## Migrate up
+
+    source env.sh
+
+    go run migrations/migrate.go
+
+OR
+
+    source env.sh
+
+    migrate -database ${POSTGRESQL_URL} -path ./db/migrations up
