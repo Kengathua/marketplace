@@ -28,5 +28,5 @@ func main() {
 	})
 
 	retail.RegisterRoutes(retailURL, config.DB)
-	app.Listen(":3000")
+	app.Listen(":8000")
 }

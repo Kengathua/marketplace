@@ -59,14 +59,21 @@ type Model struct {
 	common.BaseModel `gorm:"embedded"`
 	BrandID          uuid.UUID `gorm:"foreignKey:ID" json:"brand_id"`
 	Brand            Brand     `gorm:"foreignkey:BrandID;references:id" json:"brand"`
+	ItemTypeID       uuid.UUID `gorm:"foreignKey:ID" json:"item_type_id"`
+	ItemType         ItemType  `gorm:"foreignkey:ItemTypeID;references:id" json:"item_type"`
 	ModelNumber      string    `gorm:"column:model_number" json:"model_number"`
 	ModelCode        string    `gorm:"column:model_code" json:"model_code"`
 }
 
 type Item struct {
 	common.BaseModel `gorm:"embedded"`
-	ModelID          uuid.UUID `gorm:"foreignKey:ID" json:"model_id"`
+	ItemTypeID       uuid.UUID `gorm:"foreignKey:ID" json:"item_type_id"`
+	ItemType         ItemType  `gorm:"foreignkey:ItemTypeID;references:id" json:"item_type"`
+	BrandID          uuid.UUID `gorm:"foreignKey:ID;null" json:"brand_id"`
+	Brand            Brand     `gorm:"foreignkey:BrandID;references:id" json:"brand"`
+	ModelID          uuid.UUID `gorm:"foreignKey:ID;null" json:"model_id"`
 	Model            Model     `gorm:"foreignkey:ModelID;references:id" json:"model"`
+	ItemSize         string    `gorm:"column:item_size" json:"item_size"`
 	ItemName         string    `gorm:"column:item_name" json:"item_name"`
 	Barcode          string    `gorm:"column:barcode" json:"barcode"`
 	ItemCode         string    `gorm:"column:item_code" json:"item_code"`

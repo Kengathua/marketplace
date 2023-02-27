@@ -49,8 +49,8 @@ func (h Handler) AddCategory(c *fiber.Ctx) error {
 	category.CategoryName = body.CategoryName
 	category.CategoryCode = body.CategoryCode
 	category.Description = body.Description
-	// division.CreatedBy = user.ID
-	// division.UpdatedBy = user.ID
+	// category.CreatedBy = user.ID
+	// category.UpdatedBy = user.ID
 
 	if result := h.DB.Create(&category); result.Error != nil {
 		return fiber.NewError(fiber.StatusNotFound, result.Error.Error())
