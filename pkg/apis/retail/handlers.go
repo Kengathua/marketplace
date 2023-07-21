@@ -1,4 +1,4 @@
-package controllers
+package retail
 
 import "gorm.io/gorm"
 

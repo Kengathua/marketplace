@@ -2,12 +2,11 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/matawis/matawis/pkg/retail/controllers"
 	"gorm.io/gorm"
 )
 
-func RegisterRoutes(url fiber.Router, db *gorm.DB) {
-	h := &controllers.Handler{
+func RegisterRetailRoutes(url fiber.Router, db *gorm.DB) {
+	h := &Handler{
 		DB: db,
 	}
 

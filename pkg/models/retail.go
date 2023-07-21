@@ -106,6 +106,7 @@ type CatalogItem struct {
 	ThresholdPrice   decimal.Decimal `gorm:"type:decimal(10,2);column:threshold_price" json:"threshold_price"`
 }
 
+// Add owner -> References user
 type Cart struct {
 	common.BaseModel `gorm:"embedded"`
 	CartName         string

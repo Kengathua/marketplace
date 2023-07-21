@@ -1,4 +1,4 @@
-package controllers
+package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
