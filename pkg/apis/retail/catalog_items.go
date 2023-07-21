@@ -2,13 +2,12 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 	"github.com/matawis/matawis/pkg/models"
 	"github.com/shopspring/decimal"
 )
 
 type CatalogItemRequestBody struct {
-	ItemID         uuid.UUID       `json:"item_id"`
+	ItemID         string          `json:"item_id"`
 	MarkedPrice    decimal.Decimal `json:"marked_price"`
 	DiscountAmount decimal.Decimal `json:"discount_amount"`
 	SellingPrice   decimal.Decimal `json:"selling_price"`

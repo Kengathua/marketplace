@@ -2,15 +2,14 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 	"github.com/matawis/matawis/pkg/models"
 )
 
 type ModelRequestBody struct {
-	BrandID     uuid.UUID `json:"brand_id"`
-	ItemTypeID  uuid.UUID `json:"item_type_id"`
-	ModelNumber string    `json:"type_name"`
-	ModelCode   string    `json:"type_code"`
+	BrandID     string `json:"brand_id"`
+	ItemTypeID  string `json:"item_type_id"`
+	ModelNumber string `json:"type_name"`
+	ModelCode   string `json:"type_code"`
 }
 
 func (h Handler) GetModels(c *fiber.Ctx) error {

@@ -142,14 +142,6 @@ CREATE TABLE IF NOT EXISTS items(
     updated_by uuid,
     is_active boolean,
     business_partner varchar(300) NOT NULL,
-    item_type_id uuid NULL CONSTRAINT fk_brand_item_types_item_type
-        REFERENCES item_types (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
-    brand_id uuid NULL CONSTRAINT fk_items_brand
-        REFERENCES brands (id) MATCH SIMPLE
-        ON UPDATE NO ACTION
-        ON DELETE NO ACTION,
     model_id uuid NULL CONSTRAINT fk_items_model
         REFERENCES models (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -169,7 +161,7 @@ CREATE TABLE IF NOT EXISTS catalog_items(
     created_by uuid,
     updated_by uuid,
     is_active boolean,
-    business_partner text COLLATE pg_catalog."default",
+    business_partner varchar(300),
     item_id uuid NOT NULL CONSTRAINT fk_catalog_items_item
         REFERENCES items (id) MATCH SIMPLE
         ON UPDATE NO ACTION
@@ -178,6 +170,66 @@ CREATE TABLE IF NOT EXISTS catalog_items(
     discount_amount numeric(10,2),
     selling_price numeric(10,2),
     threshold_price numeric(10,2)
+);
+
+CREATE TABLE IF NOT EXISTS customers(
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    deleted_at timestamp with time zone,
+    created_by uuid,
+    updated_by uuid,
+    is_active boolean,
+    business_partner varchar(300),
+    title varchar(300) NOT NULL,
+    first_name varchar(300)  NOT NULL,
+    other_names varchar(300) NULL,
+    last_name varchar(300)  NOT NULL,
+    email varchar(300)  NOT NULL,
+    phone_number varchar(300)  NULL,
+    gender varchar(300)  NULL,
+    date_of_birth timestamp with time zone,
+    customer_number varchar(300)
+);
+
+CREATE TABLE IF NOT EXISTS customer_carts(
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    deleted_at timestamp with time zone,
+    created_by uuid,
+    updated_by uuid,
+    is_active boolean,
+    business_partner varchar(300),
+    customer_order_guid uuid NULL,
+    customer_id uuid NOT NULL CONSTRAINT fk_customer_carts_customer
+        REFERENCES customers (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    cart_name varchar(300),
+    cart_code varchar(300)
+);
+
+CREATE TABLE IF NOT EXISTS customer_cart_items(
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    deleted_at timestamp with time zone,
+    created_by uuid,
+    updated_by uuid,
+    is_active boolean,
+    business_partner varchar(300),
+    customer_cart_id uuid NOT NULL CONSTRAINT fk_customer_cart_items_customer_cart
+        REFERENCES customer_carts (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    catalog_item_id uuid NOT NULL CONSTRAINT fk_customer_cart_items_catalog_item
+        REFERENCES catalog_items (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    unit_price numeric(10,2),
+    quantity numeric(10,2),
+    total_price numeric(10,2)
 );
 
 COMMIT;

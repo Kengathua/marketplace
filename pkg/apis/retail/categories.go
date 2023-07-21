@@ -2,15 +2,14 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 	"github.com/matawis/matawis/pkg/models"
 )
 
 type CategoryRequestBody struct {
-	SuperCategoryID uuid.UUID `json:"super_category_id"`
-	CategoryName    string    `json:"category_name"`
-	CategoryCode    string    `json:"category_code"`
-	Description     string    `json:"description"`
+	SuperCategoryID string `json:"super_category_id"`
+	CategoryName    string `json:"category_name"`
+	CategoryCode    string `json:"category_code"`
+	Description     string `json:"description"`
 }
 
 func (h Handler) GetCategories(c *fiber.Ctx) error {

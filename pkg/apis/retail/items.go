@@ -2,19 +2,16 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 	"github.com/matawis/matawis/pkg/models"
 )
 
 type ItemRequestBody struct {
-	ItemTypeID uuid.UUID `json:"item_type_id"`
-	BrandID    uuid.UUID `json:"brand_id"`
-	ModelID    uuid.UUID `json:"model_id"`
-	ItemName   string    `json:"item_name"`
-	ItemCode   string    `json:"item_code"`
-	ItemSize   string    `json:"item_size"`
-	Barcode    string    `json:"barcode"`
-	MakeYear   string    `json:"make_year"`
+	ModelID  string `json:"model_id"`
+	ItemName string `json:"item_name"`
+	ItemCode string `json:"item_code"`
+	ItemSize string `json:"item_size"`
+	Barcode  string `json:"barcode"`
+	MakeYear string `json:"make_year"`
 }
 
 func (h Handler) GetItems(c *fiber.Ctx) error {
@@ -49,8 +46,6 @@ func (h Handler) AddItem(c *fiber.Ctx) error {
 
 	var item models.Item
 
-	item.ItemTypeID = body.ItemTypeID
-	item.BrandID = body.BrandID
 	item.ModelID = body.ModelID
 	item.ItemName = body.ItemName
 	item.ItemCode = body.ItemCode
@@ -87,8 +82,6 @@ func (h Handler) UpdateItem(c *fiber.Ctx) error {
 		return fiber.NewError(fiber.StatusNotFound, result.Error.Error())
 	}
 
-	item.ItemTypeID = body.ItemTypeID
-	item.BrandID = body.BrandID
 	item.ModelID = body.ModelID
 	item.ItemName = body.ItemName
 	item.ItemCode = body.ItemCode
