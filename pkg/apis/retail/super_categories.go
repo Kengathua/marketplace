@@ -2,15 +2,14 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 	"github.com/matawis/matawis/pkg/models"
 )
 
 type SuperCategoryRequestBody struct {
-	DivisionID        uuid.UUID `json:"division_id"`
-	SuperCategoryName string    `json:"super_category_name"`
-	SuperCategoryCode string    `json:"super_category_code"`
-	Description       string    `json:"description"`
+	DivisionID        string `json:"division_id"`
+	SuperCategoryName string `json:"super_category_name"`
+	SuperCategoryCode string `json:"super_category_code"`
+	Description       string `json:"description"`
 }
 
 func (h Handler) GetSuperCategories(c *fiber.Ctx) error {

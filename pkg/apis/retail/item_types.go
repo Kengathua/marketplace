@@ -2,14 +2,13 @@ package retail
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/google/uuid"
 	"github.com/matawis/matawis/pkg/models"
 )
 
 type ItemTypeRequestBody struct {
-	CategoryID uuid.UUID `json:"category_id"`
-	TypeName   string    `json:"type_name"`
-	TypeCode   string    `json:"type_code"`
+	CategoryID string `json:"category_id"`
+	TypeName   string `json:"type_name"`
+	TypeCode   string `json:"type_code"`
 }
 
 func (h Handler) GetItemTypes(c *fiber.Ctx) error {
