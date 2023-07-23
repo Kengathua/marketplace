@@ -6,9 +6,9 @@ import (
 )
 
 type CustomerOrderRequestBody struct {
-	CustomerCartID string
-	OrderName      string
-	OrderCode      string
+	CustomerCartID string `json:"customer_cart_id"`
+	OrderName      string `json:"order_name"`
+	OrderCode      string `json:"order_code"`
 }
 
 func (h Handler) GetCustomerOrders(c *fiber.Ctx) error {

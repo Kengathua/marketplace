@@ -1,3 +1,5 @@
+DROP TABLE IF EXISTS schema_migrations CASCADE;
+
 DROP TABLE IF EXISTS users CASCADE;
 
 DROP TABLE IF EXISTS business_partners CASCADE;
@@ -25,5 +27,9 @@ DROP TABLE IF EXISTS customers CASCADE;
 DROP TABLE IF EXISTS customer_carts CASCADE;
 
 DROP TABLE IF EXISTS customer_cart_items CASCADE;
+
+DROP TABLE IF EXISTS customer_orders CASCADE;
+
+DROP TABLE IF EXISTS customer_order_items CASCADE;
 
 COMMIT;
