@@ -30,9 +30,7 @@ func RunDBMigrationUp(migrationURL string, dbSource string) {
 
 func main() {
 	config.DB.Exec(`CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;`)
-	config.DB.AutoMigrate(&models.CustomerCart{})
-	config.DB.AutoMigrate(&models.CustomerCartItem{})
+	RunDBMigrationUp(os.Getenv("MIGRATION_URL"), os.Getenv("POSTGRESQL_URL"))
 	config.DB.AutoMigrate(&models.CustomerOrder{})
 	config.DB.AutoMigrate(&models.CustomerOrderItem{})
-	RunDBMigrationUp(os.Getenv("MIGRATION_URL"), os.Getenv("POSTGRESQL_URL"))
 }

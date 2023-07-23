@@ -32,7 +32,7 @@ type BaseModel struct {
 }
 
 type BioData struct {
-	BaseModel
+	Base
 	Title       string     `json:"title"`
 	FirstName   string     `json:"first_name"`
 	OtherNames  string     `json:"other_names"`
