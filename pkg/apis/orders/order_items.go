@@ -6,11 +6,11 @@ import (
 )
 
 type CustomerOrderItemRequestBody struct {
-	CustomerOrderID    string
-	CustomerCartItemID string
-	UnitPrice          string
-	Quantity           string
-	TotalPrice         string
+	CustomerOrderID    string `json:"customer_order_id"`
+	CustomerCartItemID string `json:"customer_cart_id"`
+	UnitPrice          string `json:"unit_price"`
+	Quantity           string `json:"quantity_id"`
+	TotalPrice         string `json:"total_price"`
 }
 
 func (h Handler) GetCustomerOrderItems(c *fiber.Ctx) error {

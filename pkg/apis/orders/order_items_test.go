@@ -12,7 +12,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func Test_CustomerCartItem(t *testing.T) {
+func Test_CustomerOrderItem(t *testing.T) {
 	db := tests.GetTestDB()
 	assert := assert.New(t)
 	tx := db.Begin()
@@ -104,17 +104,34 @@ func Test_CustomerCartItem(t *testing.T) {
 	customerCartItem := models.CustomerCartItem{
 		CustomerCartID: *customerCart.ID,
 		CatalogItemID:  *catalogItem.ID,
-		UnitPrice:      "300",
-		Quantity:       "5",
-		TotalPrice:     "1500",
+		UnitPrice:      "13000",
+		Quantity:       "1",
+		TotalPrice:     "13000",
 	}
 
 	err = tx.Create(&customerCartItem).Error
 	assert.Nil(err)
 
+	customerOrder := models.CustomerOrder{
+		CustomerCartID: *customerCart.ID,
+		OrderName:      "Order One",
+		OrderCode:      "001",
+	}
+	err = tx.Create(&customerOrder).Error
+	assert.Nil(err)
+
+	customerOrderItem := models.CustomerOrderItem{
+		CustomerOrderID:    *customerOrder.ID,
+		CustomerCartItemID: *customerCartItem.ID,
+		UnitPrice:          "13000",
+		Quantity:           "1",
+		TotalPrice:         "13000",
+	}
+	err = tx.Create(&customerOrderItem).Error
+	assert.Nil(err)
 	tx.Commit()
 
-	testCartItemID := *customerCartItem.ID
+	testOrderItemID := *customerOrderItem.ID
 
 	cartItemTests := []struct {
 		description  string                 // description of the test case
@@ -125,24 +142,24 @@ func Test_CustomerCartItem(t *testing.T) {
 	}{
 		{
 			description:  "get HTTP status 200",
-			route:        "/api/v1/orders/customer_cart_items",
+			route:        "/api/v1/orders/customer_order_items",
 			expectedCode: http.StatusOK, // 200
 			httpMethod:   "GET",
 		},
 		{
 			description:  "get HTTP status 200",
-			route:        fmt.Sprintf("/api/v1/orders/customer_cart_items/%s", testCartItemID),
+			route:        fmt.Sprintf("/api/v1/orders/customer_order_items/%s", testOrderItemID),
 			expectedCode: http.StatusOK, // 200
 			httpMethod:   "GET",
 		},
 		{
 			description:  "post HTTP status 201",
-			route:        "/api/v1/orders/customer_cart_items",
+			route:        "/api/v1/orders/customer_order_items",
 			expectedCode: http.StatusCreated, // 201
 			httpMethod:   "POST",
 			payload: map[string]interface{}{
-				"customer_cart_id": *customerCart.ID,
-				"catalog_item_id":  *catalogItem.ID,
+				"customer_order_id": *customerOrder.ID,
+				"customer_cart_id":  *customerCartItem.ID,
 				"unit_price":       "12000",
 				"quantity":         "1",
 				"total_price":      "12000",
@@ -150,12 +167,12 @@ func Test_CustomerCartItem(t *testing.T) {
 		},
 		{
 			description:  "put HTTP status 201",
-			route:        fmt.Sprintf("/api/v1/orders/customer_cart_items/%s", testCartItemID),
+			route:        fmt.Sprintf("/api/v1/orders/customer_order_items/%s", testOrderItemID),
 			expectedCode: http.StatusOK, // 200
 			httpMethod:   "PUT",
 			payload: map[string]interface{}{
-				"customer_cart_id": *customerCart.ID,
-				"catalog_item_id":  *catalogItem.ID,
+				"customer_order_id": *customerOrder.ID,
+				"customer_cart_id":  *customerCartItem.ID,
 				"unit_price":       "12500",
 				"quantity":         "1",
 				"total_price":      "12500",
@@ -163,7 +180,7 @@ func Test_CustomerCartItem(t *testing.T) {
 		},
 		{
 			description:  "delete HTTP status 200",
-			route:        fmt.Sprintf("/api/v1/orders/customer_cart_items/%s", testCartItemID),
+			route:        fmt.Sprintf("/api/v1/orders/customer_order_items/%s", testOrderItemID),
 			expectedCode: http.StatusOK, // 200
 			httpMethod:   "DELETE",
 		},

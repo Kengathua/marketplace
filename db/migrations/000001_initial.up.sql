@@ -256,4 +256,44 @@ CREATE TABLE IF NOT EXISTS customer_cart_items(
     total_price numeric(10,2)
 );
 
+CREATE TABLE IF NOT EXISTS customer_orders(
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    deleted_at timestamp with time zone,
+    created_by uuid NOT NULL,
+    updated_by uuid NOT NULL,
+    is_active boolean,
+    business_partner varchar(300),
+    customer_cart_id uuid NOT NULL CONSTRAINT fk_customer_orders_customer_cart
+        REFERENCES customer_carts (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    order_name varchar(300),
+    order_code varchar(300)
+);
+
+CREATE TABLE IF NOT EXISTS customer_order_items(
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    deleted_at timestamp with time zone,
+    created_by uuid NOT NULL,
+    updated_by uuid NOT NULL,
+    is_active boolean,
+    business_partner varchar(300),
+    customer_order_id uuid NOT NULL CONSTRAINT fk_customer_order_items_customer_order
+        REFERENCES customer_orders (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    customer_cart_item_id uuid NOT NULL CONSTRAINT fk_customer_order_items_customer_cart_item
+        REFERENCES customer_cart_items (id) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    uni_price varchar(300),
+    quantity varchar(300),
+    total_price varchar(300),
+    unit_price varchar(300)
+);
+
 COMMIT;
