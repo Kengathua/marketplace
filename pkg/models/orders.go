@@ -28,8 +28,6 @@ type CustomerOrder struct {
 	common.BaseModel
 	CustomerCartID string
 	CustomerCart   CustomerCart
-	CustomerID     string
-	Customer       Customer
 	OrderName      string
 	OrderCode      string
 }
@@ -40,7 +38,7 @@ type CustomerOrderItem struct {
 	CustomerOrder      CustomerOrder
 	CustomerCartItemID string
 	CustomerCartItem   CustomerCartItem
-	UniPrice           string
+	UnitPrice          string
 	Quantity           string
 	TotalPrice         string
 }

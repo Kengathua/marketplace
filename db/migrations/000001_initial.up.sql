@@ -2,6 +2,30 @@ BEGIN;
 
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp" WITH SCHEMA public;
 
+CREATE TABLE IF NOT EXISTS users(
+    id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
+    created_at timestamp with time zone NOT NULL,
+    updated_at timestamp with time zone NOT NULL,
+    deleted_at timestamp with time zone,
+    created_by uuid,
+    updated_by uuid,
+    is_active boolean DEFAULT true,
+    guid uuid NULL,
+    title varchar(300),
+    first_name varchar(300) NOT NULL,
+    other_names varchar(300),
+    last_name varchar(300) NOT NULL,
+    email varchar(300) NOT NULL UNIQUE,
+    phone_number varchar(300),
+    gender varchar(300) NOT NULL,
+    date_of_birth timestamp with time zone,
+    password varchar(300) NOT NULL,
+    last_login timestamp with time zone,
+    is_staff boolean,
+    is_admin boolean,
+    is_superuser boolean
+);
+
 CREATE TABLE IF NOT EXISTS business_partners(
     id uuid NOT NULL PRIMARY KEY DEFAULT uuid_generate_v4(),
     created_at timestamp with time zone NOT NULL,
