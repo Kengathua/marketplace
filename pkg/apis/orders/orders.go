@@ -1,8 +1,8 @@
 package orders
 
 import (
+	"github.com/Kengathua/marketplace/pkg/models"
 	"github.com/gofiber/fiber/v2"
-	"github.com/matawis/matawis/pkg/models"
 )
 
 type CustomerOrderRequestBody struct {

@@ -4,7 +4,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/matawis/matawis/tests"
+	"github.com/Kengathua/marketplace/tests"
 	"gorm.io/gorm"
 )
 

@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"testing"
 
-	"github.com/matawis/matawis/pkg/common"
-	"github.com/matawis/matawis/pkg/models"
-	"github.com/matawis/matawis/tests"
+	"github.com/Kengathua/marketplace/pkg/common"
+	"github.com/Kengathua/marketplace/pkg/models"
+	"github.com/Kengathua/marketplace/tests"
 	"github.com/shopspring/decimal"
 	"github.com/stretchr/testify/assert"
 )
@@ -160,9 +160,9 @@ func Test_CustomerOrderItem(t *testing.T) {
 			payload: map[string]interface{}{
 				"customer_order_id": *customerOrder.ID,
 				"customer_cart_id":  *customerCartItem.ID,
-				"unit_price":       "12000",
-				"quantity":         "1",
-				"total_price":      "12000",
+				"unit_price":        "12000",
+				"quantity":          "1",
+				"total_price":       "12000",
 			},
 		},
 		{
@@ -173,9 +173,9 @@ func Test_CustomerOrderItem(t *testing.T) {
 			payload: map[string]interface{}{
 				"customer_order_id": *customerOrder.ID,
 				"customer_cart_id":  *customerCartItem.ID,
-				"unit_price":       "12500",
-				"quantity":         "1",
-				"total_price":      "12500",
+				"unit_price":        "12500",
+				"quantity":          "1",
+				"total_price":       "12500",
 			},
 		},
 		{

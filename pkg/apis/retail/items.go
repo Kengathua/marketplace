@@ -1,8 +1,8 @@
 package retail
 
 import (
+	"github.com/Kengathua/marketplace/pkg/models"
 	"github.com/gofiber/fiber/v2"
-	"github.com/matawis/matawis/pkg/models"
 )
 
 type ItemRequestBody struct {

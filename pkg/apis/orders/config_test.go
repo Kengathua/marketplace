@@ -12,10 +12,10 @@ import (
 	"testing"
 	"time"
 
+	"github.com/Kengathua/marketplace/pkg/common"
+	"github.com/Kengathua/marketplace/pkg/models"
+	"github.com/Kengathua/marketplace/tests"
 	"github.com/gofiber/fiber/v2"
-	"github.com/matawis/matawis/pkg/common"
-	"github.com/matawis/matawis/pkg/models"
-	"github.com/matawis/matawis/tests"
 
 	"github.com/stretchr/testify/assert"
 	"gorm.io/gorm"

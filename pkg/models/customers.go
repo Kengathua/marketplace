@@ -1,7 +1,7 @@
 package models
 
 import (
-	"github.com/matawis/matawis/pkg/common"
+	"github.com/Kengathua/marketplace/pkg/common"
 )
 
 type Customer struct {

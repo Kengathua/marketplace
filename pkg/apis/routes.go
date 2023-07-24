@@ -1,11 +1,11 @@
 package apis
 
 import (
+	"github.com/Kengathua/marketplace/pkg/apis/orders"
+	"github.com/Kengathua/marketplace/pkg/apis/retail"
 	"github.com/gofiber/fiber/v2"
-	"github.com/matawis/matawis/pkg/apis/retail"
-	"github.com/matawis/matawis/pkg/apis/orders"
 
-	// "github.com/matawis/matawis/pkg/apis/users"
+	// "github.com/Kengathua/marketplace/pkg/apis/users"
 	"gorm.io/gorm"
 )
 
@@ -23,6 +23,6 @@ func RegisterAPIRoutes(url fiber.Router, db *gorm.DB) {
 		return c.Next()
 	})
 
-	orders.RegisterOrderRoutes(ordersURL, db)              // /api/v1/orders
+	orders.RegisterOrderRoutes(ordersURL, db)  // /api/v1/orders
 	retail.RegisterRetailRoutes(retailURL, db) // /api/v1/retail
 }

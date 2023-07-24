@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/matawis/matawis/pkg/common"
+	"github.com/Kengathua/marketplace/pkg/common"
 	"golang.org/x/crypto/bcrypt"
 )
 

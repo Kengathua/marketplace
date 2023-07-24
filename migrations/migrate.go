@@ -3,11 +3,11 @@ package main
 import (
 	"os"
 
+	"github.com/Kengathua/marketplace/pkg/config"
+	"github.com/Kengathua/marketplace/pkg/models"
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"
 	_ "github.com/golang-migrate/migrate/v4/source/file"
-	"github.com/matawis/matawis/pkg/config"
-	"github.com/matawis/matawis/pkg/models"
 	"github.com/rs/zerolog/log"
 )
 
