@@ -44,7 +44,7 @@ func main() {
 	waitForInterrupt(cancel)
 
 	log.Println("Shutting down gracefully...")
-	// Perform any cleanup or additional shutdown tasks here.
+	// Any cleanup or additional shutdown tasks go here.
 
 }
 
