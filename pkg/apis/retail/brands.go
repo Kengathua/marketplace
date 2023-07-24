@@ -3,11 +3,12 @@ package retail
 import (
 	"github.com/Kengathua/marketplace/pkg/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 )
 
 type BrandRequestBody struct {
-	BrandName string `json:"type_name"`
-	BrandCode string `json:"type_code"`
+	BrandName string `json:"brand_name"`
+	BrandCode string `json:"brand_code"`
 }
 
 func (h Handler) GetBrands(c *fiber.Ctx) error {
@@ -33,7 +34,11 @@ func (h Handler) GetBrand(c *fiber.Ctx) error {
 
 func (h Handler) AddBrand(c *fiber.Ctx) error {
 	body := BrandRequestBody{}
-	// user := c.Locals("user").(models.User)
+	user := c.Locals("user").(models.User)
+	userID, err := uuid.Parse(*user.ID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
 
 	// parse body, attach to BrandRequestBody struct
 	if err := c.BodyParser(&body); err != nil {
@@ -44,8 +49,8 @@ func (h Handler) AddBrand(c *fiber.Ctx) error {
 
 	brand.BrandName = body.BrandName
 	brand.BrandCode = body.BrandCode
-	// brand.CreatedBy = user.ID
-	// brand.UpdatedBy = user.ID
+	brand.CreatedBy = userID
+	brand.UpdatedBy = userID
 
 	if result := h.DB.Create(&brand); result.Error != nil {
 		return fiber.NewError(fiber.StatusNotFound, result.Error.Error())
@@ -61,7 +66,11 @@ func (h Handler) AddBrand(c *fiber.Ctx) error {
 func (h Handler) UpdateBrand(c *fiber.Ctx) error {
 	id := c.Params("id")
 	body := BrandRequestBody{}
-	// user := c.Locals("user").(models.User)
+	user := c.Locals("user").(models.User)
+	userID, err := uuid.Parse(*user.ID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
 
 	// getting request's body
 	if err := c.BodyParser(&body); err != nil {
@@ -76,7 +85,7 @@ func (h Handler) UpdateBrand(c *fiber.Ctx) error {
 
 	brand.BrandName = body.BrandName
 	brand.BrandCode = body.BrandCode
-	// brand.UpdatedBy = user.ID
+	brand.UpdatedBy = userID
 
 	h.DB.Save(&brand)
 

@@ -3,6 +3,7 @@ package retail
 import (
 	"github.com/Kengathua/marketplace/pkg/models"
 	"github.com/gofiber/fiber/v2"
+	"github.com/google/uuid"
 )
 
 type DivisionRequestBody struct {
@@ -34,7 +35,11 @@ func (h Handler) GetDivision(c *fiber.Ctx) error {
 
 func (h Handler) AddDivision(c *fiber.Ctx) error {
 	body := DivisionRequestBody{}
-	// user := c.Locals("user").(models.User)
+	user := c.Locals("user").(models.User)
+	userID, err := uuid.Parse(*user.ID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
 
 	// parse body, attach to DivisionRequestBody struct
 	if err := c.BodyParser(&body); err != nil {
@@ -46,8 +51,8 @@ func (h Handler) AddDivision(c *fiber.Ctx) error {
 	division.DivisionName = body.DivisionName
 	division.DivisionCode = body.DivisionCode
 	division.Description = body.Description
-	// division.CreatedBy = user.ID
-	// division.UpdatedBy = user.ID
+	division.CreatedBy = userID
+	division.UpdatedBy = userID
 
 	// insert new db entry
 	if result := h.DB.Create(&division); result.Error != nil {
@@ -60,7 +65,11 @@ func (h Handler) AddDivision(c *fiber.Ctx) error {
 func (h Handler) UpdateDivision(c *fiber.Ctx) error {
 	id := c.Params("id")
 	body := DivisionRequestBody{}
-	// user := c.Locals("user").(models.User)
+	user := c.Locals("user").(models.User)
+	userID, err := uuid.Parse(*user.ID)
+	if err != nil {
+		return fiber.NewError(fiber.StatusBadRequest, err.Error())
+	}
 
 	// getting request's body
 	if err := c.BodyParser(&body); err != nil {
@@ -76,7 +85,7 @@ func (h Handler) UpdateDivision(c *fiber.Ctx) error {
 	division.DivisionName = body.DivisionName
 	division.DivisionCode = body.DivisionCode
 	division.Description = body.Description
-	// division.UpdatedBy = user.ID
+	division.UpdatedBy = userID
 
 	// save division
 	h.DB.Save(&division)
