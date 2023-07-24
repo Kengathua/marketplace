@@ -1,8 +1,8 @@
 package models
 
 import (
+	"github.com/Kengathua/marketplace/pkg/common"
 	"github.com/google/uuid"
-	"github.com/matawis/matawis/pkg/common"
 	"github.com/shopspring/decimal"
 )
 
@@ -72,7 +72,7 @@ type Item struct {
 	ItemName         string `gorm:"column:item_name" json:"item_name"`
 	Barcode          string `gorm:"column:barcode" json:"barcode"`
 	ItemCode         string `gorm:"column:item_code" json:"item_code"`
-	MakeYear         string  `gorm:"column:make_year" json:"make_year"`
+	MakeYear         string `gorm:"column:make_year" json:"make_year"`
 }
 
 type ItemAttribute struct {

@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"testing"
 
-	"github.com/matawis/matawis/pkg/common"
-	"github.com/matawis/matawis/tests"
+	"github.com/Kengathua/marketplace/pkg/common"
+	"github.com/Kengathua/marketplace/tests"
 	"github.com/stretchr/testify/assert"
 )
 

@@ -1,9 +1,9 @@
 package orders
 
 import (
+	"github.com/Kengathua/marketplace/pkg/models"
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
-	"github.com/matawis/matawis/pkg/models"
 )
 
 type CustomerCartRequestBody struct {

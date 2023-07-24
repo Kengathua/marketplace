@@ -1,4 +1,4 @@
-module github.com/matawis/matawis
+module github.com/Kengathua/marketplace
 
 go 1.18
 

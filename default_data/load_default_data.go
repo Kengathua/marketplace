@@ -5,9 +5,9 @@ import (
 
 	"github.com/shopspring/decimal"
 
-	"github.com/matawis/matawis/pkg/common"
-	"github.com/matawis/matawis/pkg/config"
-	"github.com/matawis/matawis/pkg/models"
+	"github.com/Kengathua/marketplace/pkg/common"
+	"github.com/Kengathua/marketplace/pkg/config"
+	"github.com/Kengathua/marketplace/pkg/models"
 )
 
 func init() {

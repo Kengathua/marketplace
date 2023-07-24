@@ -10,8 +10,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 
-	"github.com/matawis/matawis/pkg/apis"
-	"github.com/matawis/matawis/pkg/config"
+	"github.com/Kengathua/marketplace/pkg/apis"
+	"github.com/Kengathua/marketplace/pkg/config"
 )
 
 func main() {
